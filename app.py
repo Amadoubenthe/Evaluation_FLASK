@@ -13,8 +13,8 @@ from resources.produit import Produit, ProduitList
 from resources.client import Client, ClientList
 
 app = Flask(__name__)
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root''@localhost/data_db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root''@localhost/data_db'
 
 JWT_ACCESS_TOKEN_EXPIRES = timedelta(minutes=10)
 JWT_REFRESH_TOKEN_EXPIRES = timedelta(minutes=1)

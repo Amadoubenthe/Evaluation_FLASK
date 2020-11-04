@@ -23,23 +23,9 @@ class Commercial(Resource):
 						nullable=False,
 						help="This field cannot be left blank!"
 						)
-	
-	parser.add_argument('date_emb',
-		                type=lambda x: datetime.datetime.strptime(x, "%Y-%m-%d"),
-	                    nullable=False,
-	                    required=True,
-	                    help="This field cannot be left blank!"
-	                    )
 
 	parser.add_argument('matricule',
 						type=str,
-						nullable=False,
-						required=True,
-						help="This field cannot be left blank!"
-						)
-
-	parser.add_argument('user_id',
-						type=int,
 						nullable=False,
 						required=True,
 						help="This field cannot be left blank!"
@@ -74,15 +60,13 @@ class Commercial(Resource):
 		if not first_name:
 			return {'message': "Veuilez entrer le prénom"}
 
-		date_emb = data['date_emb']
-		if not date_emb:
-			return {'message': "Veuilez entrer la date d'embauche"}
-
 		matricule = data['matricule']
 		if not matricule:
 			return {'message': "Veuilez entrer le matricule"}	
 
-		commercial = CommercialModel(data['last_name'], data['first_name'], data['date_emb'], data['matricule'], data['user_id'])
+		commercial = CommercialModel(data['last_name'], data['first_name'], data['matricule'])
+		commercial.date_emb = datetime.datetime.now()
+		commercial.user_id = get_jwt_identity()
 
 		try:
 			print(commercial.last_name)

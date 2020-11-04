@@ -20,12 +20,6 @@ class Produit(Resource):
 						nullable=False,
 						help="This field cannot be left blank!"
 						)
-
-	parser.add_argument('date_mise_vente',
-						type=lambda x: datetime.datetime.strptime(x,"%Y-%m-%d"),
-						nullable=False,
-						required=True,
-						)
 	
 
 	parser.add_argument('status',
@@ -51,13 +45,6 @@ class Produit(Resource):
 
 	parser.add_argument('prix_produit',
 						type=float,
-						required=True,
-						nullable=False,
-						help="This field cannot be left blank!"
-						)
-
-	parser.add_argument('user_id',
-						type=int,
 						required=True,
 						nullable=False,
 						help="This field cannot be left blank!"
@@ -89,10 +76,6 @@ class Produit(Resource):
 		if not desc:
 			return {'message': "Veuilez entrer la description du produit"}
 
-		date_mise_vente = data['date_mise_vente']
-		if not date_mise_vente:
-			return {'message': "Veuilez entrer la date de mise en vente du produit"}
-
 		status = data['status']
 		if not status:
 			return {'message': "Veuilez entrer le status du prduit"}
@@ -111,6 +94,9 @@ class Produit(Resource):
 
 
 		produit = ProduitModel(**data)
+
+		produit.date_mise_vente = datetime.datetime.now()
+		produit.user_id = get_jwt_identity()
 
 		try:
 			produit.save_to_db()

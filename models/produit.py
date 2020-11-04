@@ -19,15 +19,13 @@ class ProduitModel(db.Model):
 
 	ventes = db.relationship('VenteModel', lazy='dynamic')
 
-	def __init__(self, product_name, desc, date_mise_vente, status, type_produit, code, prix_produit, user_id):
+	def __init__(self, product_name, desc, status, type_produit, code, prix_produit):
 		self.product_name = product_name
 		self.desc = desc
-		self.date_mise_vente = date_mise_vente
 		self.status = status
 		self.type_produit = type_produit
 		self.code = code
 		self.prix_produit = prix_produit
-		self.user_id = user_id
 
 	def json(self):
 		return {

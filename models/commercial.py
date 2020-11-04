@@ -16,12 +16,12 @@ class CommercialModel(db.Model):
 
 	ventes = db.relationship('VenteModel', lazy='dynamic')
 
-	def __init__(self, last_name, first_name, date_emb, matricule, user_id):
+	def __init__(self, last_name, first_name, matricule):
 		self.last_name = last_name
 		self.first_name = first_name
-		self.date_emb = date_emb
+		# self.date_emb = date_emb
 		self.matricule = matricule
-		self.user_id = user_id
+		# self.user_id = user_id
 
 	def json(self):
 		return {

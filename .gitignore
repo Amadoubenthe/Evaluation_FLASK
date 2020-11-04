@@ -2,3 +2,4 @@
 __Pycache__/
 *.pyc
 data.db
+venv
